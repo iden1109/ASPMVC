@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery demo</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script>
+			$(function() { 
+			
+				//click button event handler
+				$('#click').click(function(){
+					//action here
+					call();
+				});
+				
+			});
+			
+			
+			//Call remote WebAPI
+			function call(){
+				$.ajax({
+					url: "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=b2b5669396b61d6fcc9b11f8d8aa9efc",
+					type:'post',
+					dataType:'JSON',
+					success: function( result ) {
+						$( "#location" ).html( "<strong>" + result.name + "</strong>" );
+						$( "#temperature" ).html(result.main.temp +"°F (" + FahrenheitToCelsius(result.main.temp) +"°C)");
+					}
+				});
+			} 
+			
+			//Fahrenheit to Celsius
+			function FahrenheitToCelsius(f){
+				return (f-32)*5/9;
+			}
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>
+				<div id='location'></div>
+				<small><div id='temperature'></div></small>
+			</h1>
+			<button id='click' type="button" class="btn btn-primary">Click Me!</button>
+		</div>
+	</body>
+</html>

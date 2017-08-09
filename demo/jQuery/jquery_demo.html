@@ -26,6 +26,7 @@
 					success: function( result ) {
 						$( "#location" ).html( "<strong>" + result.name + "</strong>" );
 						$( "#temperature" ).html(result.main.temp +"°F (" + FahrenheitToCelsius(result.main.temp) +"°C)");
+						console.log(result.name);
 					}
 				});
 			} 

@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Johnson KPI 2017</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-dialog/bootstrap-dialog.min.css" rel="stylesheet" />
+    <link href="../vendor/keen/css/keen-dashboards.css" rel="stylesheet">
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/vendor/moment.js"></script>
+    <script src="~/vendor/bootstrap/js/collapse.js"></script>
+    <script src="~/vendor/bootstrap/js/transition.js"></script>
+    <script src="~/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/vendor/bootstrap-dialog/bootstrap-dialog.min.js"></script>
+    <script src="../vendor/keen/holderjs/holder.js"></script>
+    <script>
+        Holder.add_theme("white", { background: "#fff", foreground: "#a7a7a7", size: 10 });
+    </script>
+    <script src="../vendor/keen/keen-js/dist/keen.min.js"></script>
+    <script src="../vendor/keen/js/meta.js"></script>
+    <script src="../vendor/keen/keen.dashboard.js"></script>
+    <script src="../vendor/echarts/echarts.js"></script>
+    <script src="../vendor/echarts/theme/shine.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        var warning;
+
+        $(function () {
+            warning = {
+                show: function (msg) {
+                    $("#messages>b").html(msg);
+                    $("#messages").show();
+                },
+                alert: function (msg) {
+                    //BootstrapDialog.alert(msg);
+                    var dialogInst = new BootstrapDialog();
+                    dialogInst.setTitle('Message');
+                    dialogInst.setMessage(msg);
+                    dialogInst.setType(BootstrapDialog.TYPE_SUCCESS);
+                    dialogInst.open();
+                },
+                hide: function () {
+                    $("#messages").hide();
+                    this.cancel();
+                },
+                hidden: function () {
+                    $("#messages").fadeOut(100);
+                    delete this.timeoutID;
+                },
+                hiddencheck: function () {
+                    if (!this.check()) {
+                        this.hidden();
+                    }
+                },
+                showperiod: function (msg) {
+                    this.cancel();
+                    var self = this;
+                    self.show(msg);
+                    this.timeoutID = window.setTimeout(function (msg) {
+                        self.hidden();
+                    }, 3000);
+                },
+                cancel: function () {
+                    if (typeof this.timeoutID == "number") {
+                        window.clearTimeout(this.timeoutID);
+                        delete this.timeoutID;
+                    }
+                },
+                check: function () {
+                    if (this.timeoutID != undefined) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
+                setup: function () {
+                    $("#messages>b").html("");
+                    $("#messages").hide();
+                    this.cancel();
+                }
+            };
+            warning.setup();
+
+
+        });
+
+    </script>
+</head>
+
+<body class="application">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color:#C4292F;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Content("~/Home/Index")">
+                    <img src="../dist/img/logo.jpg" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="@Url.Content("~/Home/Index")"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a></li>
+                    <li><a href="#">生產排程</a></li>
+                    <li><a href="#">生產即時看板</a></li>
+                    <li><a href="#">交期</a></li>
+                    <li><a href="#">品質</a></li>
+                    <li><a href="#">成本</a></li>
+                    <li><a href="#">生產</a></li>
+                    <li><a href="@Url.Content("~/MaterialsMarket/Index")">大宗物料行情</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body…</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="messages" class="alert alert-danger alert-dismissible" role="alert">
+        <button id="closemsg" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <b></b>
+    </div>
+
+    @RenderBody()
+
+    <p class="small text-muted"><i class="fa fa-copyright" aria-hidden="true"></i> Johnson KPI 2017</p>
+</body>
+</html>

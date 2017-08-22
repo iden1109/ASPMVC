@@ -22,7 +22,7 @@ namespace com.jhtgroup.database.common
 
     public class BaseDAL<T> where T : new()
     {
-        private string _connStr = ConfigurationManager.ConnectionStrings["Manufacture"].ConnectionString; // default connection string 
+        private string _connStr = ConfigurationManager.ConnectionStrings["CPI"].ConnectionString; // default connection string 
 
         private List<T> _list = null; //將回傳的資料集合
         private Dictionary<string, object> _parameters; //呼叫所用的參數

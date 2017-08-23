@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Selectize";
+}
+<link href="~/vendor/selectize/css/selectize.css" rel="stylesheet" />
+<link href="~/vendor/selectize/css/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="~/vendor/selectize/js/standalone/selectize.js"></script>
+
+<script>
+    $(function () {
+        //Material dropdown
+        $('#material').selectize({
+            plugins: ['remove_button'],
+            valueField: 'YYYYMM',
+            labelField: 'YYYYMM',
+            searchField: 'YYYYMM',
+            persist: false,
+            createOnBlur: true,
+            create: true,
+            load: function (query, callback) {
+                if (!query.length) return callback();
+                $.ajax({
+                    url: '/Selectize/GetMaterials',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        material: query,
+                    },
+                    success: function (results) {
+                        callback(results);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        warning.showperiod(jqXHR.responseText);
+                        callback();
+                    }
+                });
+            }
+        });
+    });
+</script>
+<h2>@ViewBag.Title</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="text" id="material" class="form-control" style="width:100%;" placeholder="MGM0111-11">
+        </div>
+        
+    </div>
+    
+
+</div>
+

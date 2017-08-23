@@ -57,5 +57,13 @@ namespace KPI2017.Models.MaterialsMarket
                 return new DateTime(Year, Month, 1);
             }
         }
+
+        public string YYYYMM
+        {
+            get
+            {
+                return Year +""+ Month;
+            }
+        }
     }
 }

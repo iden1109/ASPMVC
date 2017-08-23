@@ -216,6 +216,15 @@
     <Content Include="vendor\moment.js" />
     <Content Include="vendor\raphael\raphael.js" />
     <Content Include="vendor\raphael\raphael.min.js" />
+    <Content Include="vendor\selectize\css\selectize.bootstrap2.css" />
+    <Content Include="vendor\selectize\css\selectize.bootstrap3.css" />
+    <Content Include="vendor\selectize\css\selectize.css" />
+    <Content Include="vendor\selectize\css\selectize.default.css" />
+    <Content Include="vendor\selectize\css\selectize.legacy.css" />
+    <Content Include="vendor\selectize\js\selectize.js" />
+    <Content Include="vendor\selectize\js\selectize.min.js" />
+    <Content Include="vendor\selectize\js\standalone\selectize.js" />
+    <Content Include="vendor\selectize\js\standalone\selectize.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +233,7 @@
     <Compile Include="Controllers\common\Message.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaterialsMarketController.cs" />
+    <Compile Include="Controllers\SelectizeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,6 +273,7 @@
     <Content Include="vendor\keen\keen-js\LICENSE" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <Content Include="Views\MaterialsMarket\Index.cshtml" />
+    <Content Include="Views\Selectize\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
